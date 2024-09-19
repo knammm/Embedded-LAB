@@ -58,6 +58,7 @@ void test_LedY0();
 void test_LedY1();
 void test_7seg();
 void traffic_light();
+void control_colon();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -110,8 +111,9 @@ int main(void)
 //	  test_LedDebug();
 //	  test_LedY0();
 //	  test_LedY1();
-//	  test_7seg();
-	  traffic_light();
+//	  traffic_light();
+	  test_7seg();
+	  control_colon();
 	  setTimer2(50);
     /* USER CODE END WHILE */
 
@@ -178,6 +180,8 @@ uint8_t count_led_debug = 0;
 uint8_t count_led_Y0 = 0;
 uint8_t count_led_Y1 = 0;
 uint8_t count_led = 0;
+uint8_t count_colon = 0;
+uint8_t colon_status = 0;
 
 void test_LedDebug(){
 	// 50 * 40 = 2000 => 2 seconds
@@ -229,6 +233,14 @@ void traffic_light(){
 		HAL_GPIO_WritePin(DEBUG_LED_GPIO_Port, DEBUG_LED_Pin, 0);
 		HAL_GPIO_WritePin(OUTPUT_Y0_GPIO_Port, OUTPUT_Y0_Pin, 0);
 		HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, OUTPUT_Y1_Pin, 1);
+	}
+}
+
+void control_colon(){
+	count_colon = (count_colon + 1) % 10;
+	if(count_colon == 0){
+		colon_status = 1 - colon_status;
+		led7_SetColon(colon_status);
 	}
 }
 /* USER CODE END 4 */
