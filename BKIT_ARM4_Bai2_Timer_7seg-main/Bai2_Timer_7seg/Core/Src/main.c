@@ -58,6 +58,7 @@ void test_LedY0();
 void test_LedY1();
 void test_7seg();
 void traffic_light();
+void time_update();
 void control_colon();
 /* USER CODE END PFP */
 
@@ -112,6 +113,7 @@ int main(void)
 //	  test_LedY0();
 //	  test_LedY1();
 //	  traffic_light();
+	  time_update();
 	  test_7seg();
 	  control_colon();
 	  setTimer2(50);
@@ -181,7 +183,9 @@ uint8_t count_led_Y0 = 0;
 uint8_t count_led_Y1 = 0;
 uint8_t count_led = 0;
 uint8_t count_colon = 0;
+uint8_t count_time = 0;
 uint8_t colon_status = 0;
+uint8_t led_num[4] = {2, 3, 5, 8};
 
 void test_LedDebug(){
 	// 50 * 40 = 2000 => 2 seconds
@@ -211,10 +215,10 @@ void test_LedY1(){
 
 void test_7seg(){
 	//write number1 at led index 0 (not show dot)
-	led7_SetDigit(1, 0, 0);
-	led7_SetDigit(5, 1, 0);
-	led7_SetDigit(4, 2, 0);
-	led7_SetDigit(7, 3, 0);
+	led7_SetDigit(led_num[0], 0, 0);
+	led7_SetDigit(led_num[1], 1, 0);
+	led7_SetDigit(led_num[2], 2, 0);
+	led7_SetDigit(led_num[3], 3, 0);
 }
 
 void traffic_light(){
@@ -241,6 +245,32 @@ void control_colon(){
 	if(count_colon == 0){
 		colon_status = 1 - colon_status;
 		led7_SetColon(colon_status);
+	}
+}
+
+void time_update(){
+	count_time = (count_time + 1) % 1200;
+	if(count_time == 0){
+		// Handle minute
+		if(led_num[3] == 10){
+			led_num[3] = 0;
+			led_num[2]++;
+		}
+		else led_num[3]++;
+		if(led_num[2] == 6){
+			led_num[2] = 0;
+			led_num[1]++;
+		}
+		// Handle hour
+		if(led_num[1] == 4 && led_num[0] == 2){
+			// case 00:00
+			led_num[0] = 0;
+			led_num[1] = 0;
+		}
+		else if(led_num[1] == 10){
+			led_num[1] = 0;
+			led_num[0]++;
+		}
 	}
 }
 /* USER CODE END 4 */
