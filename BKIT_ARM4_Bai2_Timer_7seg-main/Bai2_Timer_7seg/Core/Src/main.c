@@ -110,9 +110,9 @@ int main(void)
 //	  test_LedDebug();
 //	  test_LedY0();
 //	  test_LedY1();
-//	  test_7seg();
-	  traffic_light();
-	  setTimer2(50);
+	  test_7seg();
+//	  traffic_light();
+	  setTimer2(100);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -171,7 +171,7 @@ void system_init(){
 	  HAL_GPIO_WritePin(DEBUG_LED_GPIO_Port, DEBUG_LED_Pin, 0);
 	  timer_init();
 	  led7_init();
-	  setTimer2(50);
+	  setTimer2(100);
 }
 
 uint8_t count_led_debug = 0;
