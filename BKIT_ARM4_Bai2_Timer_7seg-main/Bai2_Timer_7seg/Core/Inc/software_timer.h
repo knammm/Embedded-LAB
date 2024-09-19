@@ -10,6 +10,7 @@
 
 #include "tim.h"
 #include "software_timer.h"
+#include "led_7seg.h"
 
 extern uint16_t flag_timer2;
 
