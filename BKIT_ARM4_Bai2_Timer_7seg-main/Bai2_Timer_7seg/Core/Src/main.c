@@ -58,6 +58,7 @@ void test_LedY0();
 void test_LedY1();
 void test_7seg();
 void traffic_light();
+void shift_led();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -110,8 +111,9 @@ int main(void)
 //	  test_LedDebug();
 //	  test_LedY0();
 //	  test_LedY1();
-//	  test_7seg();
-	  traffic_light();
+//	  traffic_light();
+	  shift_led();
+	  test_7seg();
 	  setTimer2(50);
     /* USER CODE END WHILE */
 
@@ -178,6 +180,8 @@ uint8_t count_led_debug = 0;
 uint8_t count_led_Y0 = 0;
 uint8_t count_led_Y1 = 0;
 uint8_t count_led = 0;
+uint8_t count_shift = 0;
+uint8_t led_num[4] = {1, 5, 4, 7};
 
 void test_LedDebug(){
 	// 50 * 40 = 2000 => 2 seconds
@@ -207,10 +211,10 @@ void test_LedY1(){
 
 void test_7seg(){
 	//write number1 at led index 0 (not show dot)
-	led7_SetDigit(1, 0, 0);
-	led7_SetDigit(5, 1, 0);
-	led7_SetDigit(4, 2, 0);
-	led7_SetDigit(7, 3, 0);
+	led7_SetDigit(led_num[0], 0, 0);
+	led7_SetDigit(led_num[1], 1, 0);
+	led7_SetDigit(led_num[2], 2, 0);
+	led7_SetDigit(led_num[3], 3, 0);
 }
 
 void traffic_light(){
@@ -229,6 +233,17 @@ void traffic_light(){
 		HAL_GPIO_WritePin(DEBUG_LED_GPIO_Port, DEBUG_LED_Pin, 0);
 		HAL_GPIO_WritePin(OUTPUT_Y0_GPIO_Port, OUTPUT_Y0_Pin, 0);
 		HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, OUTPUT_Y1_Pin, 1);
+	}
+}
+
+void shift_led(){
+	count_shift = (count_shift + 1) % 20;
+	if(count_shift == 0){
+		uint8_t temp = led_num[3];
+		led_num[1] = led_num[0];
+		led_num[2] = led_num[1];
+		led_num[3] = led_num[2];
+		led_num[0] = led_num[3];
 	}
 }
 /* USER CODE END 4 */
