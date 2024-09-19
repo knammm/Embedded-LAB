@@ -57,6 +57,7 @@ void test_LedDebug();
 void test_LedY0();
 void test_LedY1();
 void test_7seg();
+void traffic_light();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -106,10 +107,11 @@ int main(void)
 	  while(!flag_timer2);
 	  flag_timer2 = 0;
 	  // main task, every 50ms
-	  test_LedDebug();
-	  test_LedY0();
-	  test_LedY1();
+//	  test_LedDebug();
+//	  test_LedY0();
+//	  test_LedY1();
 //	  test_7seg();
+	  traffic_light();
 	  setTimer2(50);
     /* USER CODE END WHILE */
 
@@ -175,6 +177,7 @@ void system_init(){
 uint8_t count_led_debug = 0;
 uint8_t count_led_Y0 = 0;
 uint8_t count_led_Y1 = 0;
+uint8_t count_led = 0;
 
 void test_LedDebug(){
 	// 50 * 40 = 2000 => 2 seconds
@@ -198,7 +201,7 @@ void test_LedY1(){
 	if(count_led_Y1 <= 100){
 		HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, OUTPUT_Y1_Pin, 1);
 	} else {
-		HAL_GPIO_WritePin(OUTPUT_Y0_GPIO_Port, OUTPUT_Y1_Pin, 0);
+		HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, OUTPUT_Y1_Pin, 0);
 	}
 }
 
@@ -208,6 +211,25 @@ void test_7seg(){
 	led7_SetDigit(5, 1, 0);
 	led7_SetDigit(4, 2, 0);
 	led7_SetDigit(7, 3, 0);
+}
+
+void traffic_light(){
+	count_led = (count_led + 1) % 180;
+	if(count_led <= 100){
+		HAL_GPIO_WritePin(DEBUG_LED_GPIO_Port, DEBUG_LED_Pin, 1);
+		HAL_GPIO_WritePin(OUTPUT_Y0_GPIO_Port, OUTPUT_Y0_Pin, 0);
+		HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, OUTPUT_Y1_Pin, 0);
+	}
+	else if(count_led > 100 && count_led <= 160){
+		HAL_GPIO_WritePin(DEBUG_LED_GPIO_Port, DEBUG_LED_Pin, 0);
+		HAL_GPIO_WritePin(OUTPUT_Y0_GPIO_Port, OUTPUT_Y0_Pin, 1);
+		HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, OUTPUT_Y1_Pin, 0);
+	}
+	else{
+		HAL_GPIO_WritePin(DEBUG_LED_GPIO_Port, DEBUG_LED_Pin, 0);
+		HAL_GPIO_WritePin(OUTPUT_Y0_GPIO_Port, OUTPUT_Y0_Pin, 0);
+		HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, OUTPUT_Y1_Pin, 1);
+	}
 }
 /* USER CODE END 4 */
 
