@@ -107,7 +107,6 @@ int main(void)
   while (1)
   {
 	  while(!flag_timer2);
-	  flag_timer2 = 0;
 	  // main task, every 50ms
 //	  test_LedDebug();
 //	  test_LedY0();
@@ -116,7 +115,8 @@ int main(void)
 	  time_update();
 	  test_7seg();
 	  control_colon();
-	  setTimer2(50);
+//	  setTimer2(50);
+	  flag_timer2 = 0;
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
