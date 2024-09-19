@@ -41,11 +41,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  18 .debug_line   0000dcf2  00000000  00000000  0005110c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    000c652d  00000000  00000000  0005edfe  2**0
+ 19 .debug_str    000c6588  00000000  00000000  0005edfe  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000053  00000000  00000000  0012532b  2**0
+ 20 .comment      00000053  00000000  00000000  00125386  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  00003140  00000000  00000000  00125380  2**2
+ 21 .debug_frame  00003140  00000000  00000000  001253dc  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -871,8 +871,8 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
  80007e4:	f44f 53a0 	mov.w	r3, #5120	; 0x1400
  80007e8:	61bb      	str	r3, [r7, #24]
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
- 80007ea:	f44f 5380 	mov.w	r3, #4096	; 0x1000
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV4;
+ 80007ea:	f44f 53a0 	mov.w	r3, #5120	; 0x1400
  80007ee:	61fb      	str	r3, [r7, #28]
 
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)

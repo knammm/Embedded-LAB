@@ -61,8 +61,8 @@ all: main-build
 main-build: Bai2_Timer_7seg.elf secondary-outputs
 
 # Tool invocations
-Bai2_Timer_7seg.elf: $(OBJS) $(USER_OBJS) C:\Users\84909\Desktop\STM32\ Project\ Embedded\BKIT_ARM4_Bai2_Timer_7seg-main\BKIT_ARM4_Bai2_Timer_7seg-main\Bai2_Timer_7seg\STM32F407ZGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Bai2_Timer_7seg.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\84909\Desktop\STM32 Project Embedded\BKIT_ARM4_Bai2_Timer_7seg-main\BKIT_ARM4_Bai2_Timer_7seg-main\Bai2_Timer_7seg\STM32F407ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Bai2_Timer_7seg.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Bai2_Timer_7seg.elf: $(OBJS) $(USER_OBJS) D:\My\ projects\Embedded\ Systems\ Lab\ 1\BKIT_ARM4_Bai2_Timer_7seg-main\Bai2_Timer_7seg\STM32F407ZGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Bai2_Timer_7seg.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\My projects\Embedded Systems Lab 1\BKIT_ARM4_Bai2_Timer_7seg-main\Bai2_Timer_7seg\STM32F407ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Bai2_Timer_7seg.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
