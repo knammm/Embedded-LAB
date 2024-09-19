@@ -56,7 +56,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 			}
 		}
 		// 0.5ms interrupt here
-		// 1Hz
 		counter = (counter + 1) % FREQ_1;
 		if(counter == 0){
 			led7_Scan();
