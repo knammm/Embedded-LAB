@@ -98,7 +98,7 @@ int main(void)
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
   system_init();
-  led7_SetColon(1);
+  led7_SetColon(0);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -240,10 +240,11 @@ void shift_led(){
 	count_shift = (count_shift + 1) % 20;
 	if(count_shift == 0){
 		uint8_t temp = led_num[3];
-		led_num[1] = led_num[0];
-		led_num[2] = led_num[1];
+		// 1 5 4 7
 		led_num[3] = led_num[2];
-		led_num[0] = led_num[3];
+		led_num[2] = led_num[1];
+		led_num[1] = led_num[0];
+		led_num[0] = temp;
 	}
 }
 /* USER CODE END 4 */

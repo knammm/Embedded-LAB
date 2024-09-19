@@ -8,12 +8,13 @@
 #include "software_timer.h"
 
 #define TIMER_CYCLE_2 1
+#define FREQ_1 500
 
 //software timer variable
 uint16_t flag_timer2 = 0;
 uint16_t timer2_counter = 0;
 uint16_t timer2_MUL = 0;
-
+uint16_t counter = 0;
 
 /**
   * @brief  Init timer interrupt
@@ -51,7 +52,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 				timer2_counter = timer2_MUL;
 			}
 		}
-		// 1ms interrupt here
+		// 0.5ms interrupt here
+//		counter = (counter + 1) % FREQ_1;
+//		if(counter == 0){
+//			led7_Scan();
+//		}
 		led7_Scan();
 	}
 }
