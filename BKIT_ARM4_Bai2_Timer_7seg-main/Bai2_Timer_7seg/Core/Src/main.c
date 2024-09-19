@@ -111,7 +111,7 @@ int main(void)
 	 else{
 		 HAL_GPIO_WritePin(DEBUG_LED_GPIO_Port, DEBUG_LED_Pin, 0);
 	 }
-	 HAL_Delay(1000)
+	 HAL_Delay(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
