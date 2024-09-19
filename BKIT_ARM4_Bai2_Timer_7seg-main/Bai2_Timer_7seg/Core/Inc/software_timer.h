@@ -13,8 +13,10 @@
 #include "led_7seg.h"
 
 extern uint16_t flag_timer2;
+extern uint16_t flag_timer1;
 
 void timer_init();
 void setTimer2(uint16_t duration);
+void setTimer1(uint16_t duration);
 
 #endif /* INC_SOFTWARE_TIMER_H_ */

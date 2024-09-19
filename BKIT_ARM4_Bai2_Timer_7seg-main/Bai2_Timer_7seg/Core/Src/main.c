@@ -106,17 +106,21 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  while(!flag_timer2);
+	  if(flag_timer2 == 1){
 	  // main task, every 50ms
-//	  test_LedDebug();
-//	  test_LedY0();
-//	  test_LedY1();
-//	  traffic_light();
-	  time_update();
-	  test_7seg();
-	  control_colon();
-//	  setTimer2(50);
-	  flag_timer2 = 0;
+		  //	  test_LedDebug();
+		  //	  test_LedY0();
+		  //	  test_LedY1();
+		  //	  traffic_light();
+		  test_7seg();
+		  control_colon();
+	  	  //setTimer2(50);
+	  	  flag_timer2 = 0;
+	  }
+	  if(flag_timer1 == 1){
+		  time_update();
+		  flag_timer1 = 0;
+	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -176,6 +180,7 @@ void system_init(){
 	  timer_init();
 	  led7_init();
 	  setTimer2(50);
+	  setTimer1(1000);
 }
 
 uint8_t count_led_debug = 0;
@@ -249,14 +254,14 @@ void control_colon(){
 }
 
 void time_update(){
-	count_time = (count_time + 1) % 1200;
+	count_time = (count_time + 1) % 60;
 	if(count_time == 0){
 		// Handle minute
-		if(led_num[3] == 10){
+		led_num[3]++;
+		if(led_num[3] > 9){
 			led_num[3] = 0;
 			led_num[2]++;
 		}
-		else led_num[3]++;
 		if(led_num[2] == 6){
 			led_num[2] = 0;
 			led_num[1]++;
@@ -267,7 +272,7 @@ void time_update(){
 			led_num[0] = 0;
 			led_num[1] = 0;
 		}
-		else if(led_num[1] == 10){
+		else if(led_num[1] > 9){
 			led_num[1] = 0;
 			led_num[0]++;
 		}
